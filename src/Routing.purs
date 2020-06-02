@@ -4,7 +4,7 @@ import Prelude
 import Data.Foldable (oneOf)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
-import Routing.Match (Match, int, lit, str)
+import Routing.Match (Match, int, lit, root, str)
 
 type PostId
   = Int
@@ -22,7 +22,7 @@ instance showMyRoute :: Show MyRoute where
 
 myRoute :: Match MyRoute
 myRoute =
-  lit "posts"
+  root *> lit "posts"
     *> oneOf
         [ PostEdit <$> int <* lit "edit"
         , Post <$> int
