@@ -33,10 +33,10 @@ render state =
   in
     HH.div_
       [ HH.text $ show state
-      , renderLink "#posts/" "Index"
-      , renderLink "#posts/8" "View post 8"
-      , renderLink "#posts/8/edit" "Edit post 8"
-      , renderLink "#posts/browse/2004/June" "Browse 2004 June"
+      , renderLink "posts/" "Index"
+      , renderLink "posts/8" "View post 8"
+      , renderLink "posts/8/edit" "Edit post 8"
+      , renderLink "posts/browse/2004/June" "Browse 2004 June"
       ]
 
 handleQuery ∷ forall a ac o m. Query a → H.HalogenM State ac () o m (Maybe a)
