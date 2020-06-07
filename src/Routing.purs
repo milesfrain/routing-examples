@@ -10,12 +10,7 @@ type PostId
   = Int
 
 data MyRoute
-  = PostIndex
-  | CB String
-  | Callback
-  | Post PostId
-  | PostEdit PostId
-  | PostBrowse Int String
+  = AuthorizeCallback String
 
 derive instance genericMyRoute :: Generic MyRoute _
 
@@ -26,15 +21,5 @@ myRoute :: Match MyRoute
 myRoute =
   root
     *> oneOf
-        [ lit "posts"
-            *> oneOf
-                [ PostEdit <$> int <* lit "edit"
-                , Post <$> int
-                , PostBrowse <$> (lit "browse" *> int) <*> str
-                , pure PostIndex -- Unmatched goes to index too
-                ]
-        , oneOf
-            [ CB <$> (lit "callback" *> param "code")
-            , Callback <$ lit "callback"
-            ]
+        [ AuthorizeCallback <$> (lit "callback" *> param "code")
         ]
